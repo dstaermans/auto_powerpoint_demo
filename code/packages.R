@@ -1,0 +1,6 @@
+library(tidyverse)
+library(eurostat)
+library(here)
+library(countrycode)
+library(officer)
+library(mschart)
