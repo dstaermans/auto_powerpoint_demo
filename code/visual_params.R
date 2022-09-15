@@ -14,6 +14,7 @@ dark_grey <- "#595959" #Legend and axis text color
 chart_theme <- mschart_theme(
   axis_ticks = fp_border(color = light_grey), #Color of axis
   axis_text = fp_text(font.family = "Corbel", color = dark_grey), #Color of axis text (units)
+  axis_title = fp_text(font.family = "Corbel", color = dark_grey), #Color of axis labels (for scatter plots)
   legend_text = fp_text(font.family = "Corbel", color = dark_grey, font.size = 12), #Legend text color, size
   grid_major_line = fp_border(color = dark_grey, style = "none"), #No major grid lines
   grid_minor_line = fp_border(color = dark_grey, style = "none"), #No minor grid lines

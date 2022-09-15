@@ -1,4 +1,5 @@
 #Load packages
+library(here)
 source(here("code", "packages.R"))
 
 #Define colors and chart template
@@ -23,19 +24,31 @@ slides <- add_slide(pp_template, layout = "Title and Content", master = "Frame")
                     "Is economy size related to inflation?"),
           location = ph_location_type(type = "body"))
 
-###### Slide 1: GDP per capita of DE, FR, IT, ES, NL. ######
-suppressWarnings(source(here("code", "charts", "GDP_per_capita.R")))
+###### Slide 1: GDP of DE, FR, IT, ES, NL ######
+suppressWarnings(source(here("code", "charts", "GDP.R")))
 
 slides <- add_slide(slides, layout = "Title and Content", master = "Frame") %>% 
-  ph_with(value = "Largest EU economies (GDP; 2015 EUR million)", location = ph_location_type(type = "title")) %>% 
+  ph_with(value = "Largest EU economies in 2021 (GDP; 2015 EUR million)", location = ph_location_type(type = "title")) %>% 
   ph_with(chart, location = ph_location_type(type = "body"))
 
-###### Slide 2: inflation in DE, FR, IT, ES, NL. ######
+###### Slide 2: inflation in DE, FR, IT, ES, NL ######
 suppressWarnings(source(here("code", "charts", "inflation.R")))
 
 slides <- add_slide(slides, layout = "Title and Content", master = "Frame") %>% 
   ph_with(value = "Inflation in the largest EU countries (%; y-o-y)", location = ph_location_type(type = "title")) %>% 
   ph_with(chart, location = ph_location_type(type = "body"))
+
+###### Slide 3: inflation against GDP ######
+suppressWarnings(source(here("code", "charts", "GDP_vs_inflation.R")))
+
+slides <- add_slide(slides, layout = "Title and Content", master = "Frame") %>% 
+  ph_with(value = "Inflation against GDP", location = ph_location_type(type = "title")) %>% 
+  ph_with(chart, location = ph_location_type(type = "body"))
+
+##### Last slide #####
+slides <- add_slide(pp_template, layout = "Title Slide", master = "Frame") %>% 
+  ph_with(value = "Thank you!", location = ph_location_type(type = "ctrTitle")) %>% 
+  ph_with(value = "Feel free to approach me with any questions", location = ph_location_type(type = "subTitle"))
 
 ##### Save the presentation ######
 print(slides, target = here("output.pptx"))

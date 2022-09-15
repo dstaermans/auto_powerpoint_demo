@@ -1,4 +1,4 @@
-#Line chart
+# Line chart
 create_pp_linechart <- function(data, x, y, group = NULL, showlegend = TRUE, num_fmt = "mm/yy", groupcolors) {
 
 #Creating a chart object
@@ -49,7 +49,7 @@ chart <- chart_data_line_width(chart, values = 2.25)
 
 }
 
-#Bar chart
+# Bar chart
 create_pp_barchart <- function(data, x, y, group = NULL, showlegend = TRUE, groupcolors) {
   
   #Creating a chart object
@@ -91,5 +91,47 @@ create_pp_barchart <- function(data, x, y, group = NULL, showlegend = TRUE, grou
   
   #Change gap width between the bars
   chart <- chart_settings(chart, gap_width = 50)
+  
+}
+
+# Scatter plot
+create_pp_scatter <- function(data, x, y, group = NULL, showlegend = TRUE, groupcolors, xlab, ylab) {
+  
+  #Creating a chart object
+  chart <- data %>% 
+    ms_scatterchart(x = x, y = y, group = group)
+  
+  #Apply the theme created previously
+  chart <- set_theme(chart, chart_theme)
+  
+  #Format x-axis
+  chart <- chart_ax_x(
+    chart,
+    major_tick_mark = "none",
+    minor_tick_mark = "none",
+    tick_label_pos = "low",
+  )
+  
+  #Format y-axis
+  chart <- chart_ax_y(
+    chart,
+    major_tick_mark = "none",
+    minor_tick_mark = "none"
+  )
+  
+  #Remove axis title, name x and y labels
+  chart <- chart_labels(chart,
+                        title = NULL,
+                        xlab = xlab,
+                        ylab = ylab)
+  
+  #Remove the legend (if showlegend = FALSE)
+  if(showlegend == FALSE) {
+    chart <- chart_theme(chart, legend_position = "n")
+  }
+  
+  #Change fill color for data
+  chart <- chart_data_fill(chart, values = groupcolors) %>% 
+    chart_data_stroke(values = "transparent" ) #Removes outlines for bars
   
 }
